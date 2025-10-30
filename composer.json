@@ -3,7 +3,6 @@
   "description": "Basic entity class.",
   "type": "project",
   "license": "GPL-3.0-or-later",
-  "version": "1.0.0",
   "require": {
     "php": ">=8.4",
     "gabordemooij/redbean": "dev-master",
