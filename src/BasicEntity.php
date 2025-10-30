@@ -8,11 +8,14 @@ use RedBeanPHP\OODBBean;
 use RedBeanPHP\R;
 use RedBeanPHP\RedException\SQL;
 
+/**
+ * @property int|string $id
+ */
 #[AllowDynamicProperties]
 class BasicEntity {
 
     private ?OODBBean $bean = null;
-    private ?string $name;
+
     public function __construct(string $name, ?int $id = null) {
         DBClass::connect();
         $this->name = $name;
@@ -21,6 +24,11 @@ class BasicEntity {
             $this->load($id);
         }
     }
+
+    public function isInitialized() : bool {
+        return $this->bean !== null;
+    }
+
     private array $properties = [];
     public function __set(string $name, $value): void {
         $this->properties[$name] = $value;
