@@ -26,22 +26,29 @@ class BasicTest extends TestCase {
     }
 
     public function testInitialize() {
+        // Initialize object
         $myObj = new ppEntity\BasicEntity("test");
+        // check if initializations worked
         $this->assertNotNull($myObj);;
         $this->assertTrue($myObj->isInitialized());
+        // check if bean name was correctly passed
         $this->assertEquals("test", $myObj->name);
+        // set some values
         $myObj->value1 = 'A String';
         $this->assertIsString($myObj->value1);;
         $this->assertEquals('A String', $myObj->value1);
         $myObj->value2 = 123;
         $this->assertIsInt($myObj->value2);
         $this->assertEquals(123, $myObj->value2);
+        // save object
         $myObj->save();
 
+        // save id for later
         $id = $myObj->id;
 
         unset($myObj);
 
+        // now load object and check if values are correct
         $myObj = new ppEntity\BasicEntity("test", $id);
         $this->assertNotNull($myObj);;
         $this->assertTrue($myObj->isInitialized());
