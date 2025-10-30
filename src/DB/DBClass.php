@@ -35,7 +35,9 @@ class DBClass {
     public static function connect(): void {
         if (!R::testConnection()) {
             if (!self::$envLoaded) {
-                $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+                $dir = __DIR__;
+                $envDir = str_contains($dir, 'vendor') ? explode('vendor/', $dir)[0] : $dir . '/../../';
+                $dotenv = Dotenv::createImmutable($envDir);
                 $dotenv->load();
                 self::$envLoaded = true;
             }
